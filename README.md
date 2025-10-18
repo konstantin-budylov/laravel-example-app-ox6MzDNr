@@ -1,3 +1,15 @@
+# Laravel example application
+
+### According to: https://docs.google.com/document/d/144XXs4SLVv2QkpaE83mVXrrv5L_HNMGUwOFYq_VQuoA/edit?tab=t.0 specification.
+
+### Author: Konstantin Budylov
+### Contacts:
+    - telegram: @kbudylov
+    - mail: k.budylov@gmail.com
+    - linkedin: 
+
+### Date: 10/20/2025
+
 ## Follow these steps to run and use application
 
 Checkout repository:
