@@ -19,6 +19,7 @@ services:
             IGNITION_LOCAL_SITES_PATH: '${PWD}'
         volumes:
             - '.:/var/www/html'
+            - './deployment/config/xdebug.ini:/etc/php/8.4/cli/conf.d/20-xdebug.ini'
         networks:
             - sail
         depends_on:
@@ -74,6 +75,7 @@ services:
             RABBITMQ_QUEUE: '${RABBITMQ_QUEUE}'
             RABBITMQ_DEFAULT_USER: guest
             RABBITMQ_DEFAULT_PASS: guest
+            RABBITMQ_DEFAULT_VHOST: /
         volumes:
             - 'sail-rabbitmq:/var/lib/rabbitmq'
         networks:
