@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export PHP_IDE_CONFIG="serverName=0.0.0.0"
+php -dxdebug.start_with_request=yes $@
