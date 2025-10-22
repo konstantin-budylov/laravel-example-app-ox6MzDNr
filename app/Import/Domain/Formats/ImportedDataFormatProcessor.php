@@ -6,6 +6,7 @@ use App\Import\Concerns\FormatProcessor;
 use App\Import\Xls\ImportedData;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Laravel\Reverb\Loggers\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ImportedDataFormatProcessor implements FormatProcessor
@@ -60,6 +61,7 @@ class ImportedDataFormatProcessor implements FormatProcessor
                 'date' => Carbon::parse($row['date'])?->toDateString(),
             ];
         }
+        Log::error('ImportedDataFormatProcessor: invalid row data', ['row' => $row]);
         return [];
     }
 }
