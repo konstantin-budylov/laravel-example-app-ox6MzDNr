@@ -32,4 +32,6 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
+        QUEUE_CONNECTION: sync
+        BROADCAST_CONNECTION: log
       run: php artisan test
