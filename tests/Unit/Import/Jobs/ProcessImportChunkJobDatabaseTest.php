@@ -5,6 +5,7 @@ namespace Tests\Unit\Import\Jobs;
 use App\Import\Domain\ImportedDataService;
 use App\Import\FileImportService;
 use App\Import\Jobs\ProcessImportChunkJob;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -31,11 +32,12 @@ class ProcessImportChunkJobDatabaseTest extends TestCase
         // Выполняем обработчик с моком и реальным сервисом
         $job->handle($mockFileImportService, $importedDataService);
 
-        // Проверяем, что данные действительно записаны в таблицу imported_data
+        $expectedDateTime = Carbon::parse('2020-01-01')->startOfDay()->toDateTimeString();
+
         $this->assertDatabaseHas('imported_data', [
             'id' => 1,
             'name' => 'n',
-            'date' => '2020-01-01',
+            'date' => $expectedDateTime,
         ]);
     }
 }
