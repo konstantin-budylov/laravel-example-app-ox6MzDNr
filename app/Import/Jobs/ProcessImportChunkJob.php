@@ -12,7 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 
-class ProcessImportChunk implements ShouldQueue
+class ProcessImportChunkJob implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
 

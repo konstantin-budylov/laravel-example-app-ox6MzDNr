@@ -11,7 +11,7 @@ class ImportedDataService
      * @return void
      * @throws \Exception
      */
-    public final function createFromArray(array $item): ImportedData
+    public function createFromArray(array $item): ImportedData
     {
         $model = new ImportedData([
             'id' => $item['id'],

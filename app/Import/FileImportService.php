@@ -13,14 +13,14 @@ class FileImportService
     private const REDIS_PROCESSED_KEY_NAME = 'IMPORT_%s_PROCESSED';
 
 
-    public final function import(string $filePath, FormatProcessor $processor): void
+    public function import(string $filePath, FormatProcessor $processor): void
     {
         $id = $this->generateFileId($filePath);
         FileImportJob::dispatch($id, $processor)->onQueue('default');
     }
 
 
-    public final function startTracking(string $id, int $totalRowsCount): void
+    public function startTracking(string $id, int $totalRowsCount): void
     {
         Redis::set(self::getTotalRowsCountRedisKeyName($id), $totalRowsCount);
         Redis::set(self::getProcessedRowsCountRedisKeyName($id), 0);
@@ -41,7 +41,7 @@ class FileImportService
         return (int)Redis::get(self::getProcessedRowsCountRedisKeyName($id));
     }
 
-    public final function incrementProcessedRowsCount(string $id): void
+    public function incrementProcessedRowsCount(string $id): void
     {
         Redis::incr(self::getProcessedRowsCountRedisKeyName($id), 1);
         if ($this->isFinished($id)) {

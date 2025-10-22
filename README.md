@@ -1,16 +1,17 @@
 # Laravel example application
+### XLS file uploading with data display and broadcasting
 
-### According to: https://docs.google.com/document/d/144XXs4SLVv2QkpaE83mVXrrv5L_HNMGUwOFYq_VQuoA/edit?tab=t.0 specification.
+
+### Tech spec: https://docs.google.com/document/d/144XXs4SLVv2QkpaE83mVXrrv5L_HNMGUwOFYq_VQuoA/edit?tab=t.0
 
 ### Author: Konstantin Budylov
 ### Contacts:
     - telegram: @kbudylov
     - mail: k.budylov@gmail.com
-    - linkedin: 
 
-### Date: 10/20/2025
+### Date: 10/22/2025
 
-## Follow these steps to run and use application
+## How to run:
 
 Checkout repository:
 ```git checkout https://github.com/konstantin-budylov/laravel-example-app.git```
@@ -38,5 +39,50 @@ Apply migrations:
 Setup rabbitmq queue:
 ```php artisan rabbitmq:init```
 
-Run tests:
-```./vendor/bin/phpunit```
+## How to use
+- Go to http://localhost
+- Upload file
+- Explore broadcasting messages in docker logs (reverb container)
+- Go to /data to see imported data
+- Run tests:
+  ```./vendor/bin/phpunit```
+
+
+## Application file structure overview
+```
+app/
+├─ Http/
+│  └─ Controllers/
+│     ├─ ImportController.php
+│     └─ DataController.php
+├─ resources/
+│  └─ views/
+│     ├─ welcome.blade.php
+│     └─ data/
+│        └─ index.blade.php
+└─ Import/
+├─ Concerns/
+│  └─ FormatProcessor.php
+├─ Domain/
+│  ├─ Formats/
+│  │  └─ ImportedDataFormatProcessor.php
+│  ├─ Models/
+│  │  └─ ImportedData.php
+│  ├─ ImportedDataRepository.php
+│  └─ ImportedDataService.php
+├─ Events/
+│  ├─ ImportFailed.php
+│  ├─ ImportRowFailed.php
+│  ├─ ImportRowSuccess.php
+│  ├─ ImportStarted.php
+│  └─ ImportSuccess.php
+├─ Jobs/
+│  ├─ FileImportJob.php
+│  └─ ProcessImportChunkJob.php
+├─ Xls/
+│  └─ ImportedData.php
+├─ FileImportService.php
+└─ FileImportServiceProvider.php
+```
+
+

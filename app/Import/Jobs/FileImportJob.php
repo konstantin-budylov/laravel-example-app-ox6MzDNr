@@ -36,7 +36,7 @@ class FileImportJob implements ShouldQueue
             app('import')->startTracking($this->id, $data->count());
             broadcast(new ImportStarted($this->id, $data->count()))->toOthers();
             foreach ($data->chunk(self::CHUNK_SIZE) as $chunk) {
-                ProcessImportChunk::dispatch($this->id, $chunk);
+                ProcessImportChunkJob::dispatch($this->id, $chunk);
             }
         } catch (\Exception $e) {
             broadcast(new ImportFailed($this->id, $e))->toOthers();
